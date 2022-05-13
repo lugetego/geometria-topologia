@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Registro{% endblock %}
+
+{% block body %}
+    <h1>Registro</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ registro.id }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ registro.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Apaterno</th>
+                <td>{{ registro.apaterno }}</td>
+            </tr>
+            <tr>
+                <th>Amaterno</th>
+                <td>{{ registro.amaterno }}</td>
+            </tr>
+            <tr>
+                <th>Sexo</th>
+                <td>{{ registro.sexo ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Nacimiento</th>
+                <td>{{ registro.nacimiento ? registro.nacimiento|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Correo</th>
+                <td>{{ registro.correo }}</td>
+            </tr>
+            <tr>
+                <th>Universidad</th>
+                <td>{{ registro.universidad }}</td>
+            </tr>
+            <tr>
+                <th>Carrera</th>
+                <td>{{ registro.carrera }}</td>
+            </tr>
+            <tr>
+                <th>Semestre</th>
+                <td>{{ registro.semestre }}</td>
+            </tr>
+            <tr>
+                <th>Profesor</th>
+                <td>{{ registro.profesor }}</td>
+            </tr>
+            <tr>
+                <th>UnivProf</th>
+                <td>{{ registro.univProf }}</td>
+            </tr>
+            <tr>
+                <th>CorreoProf</th>
+                <td>{{ registro.correoProf }}</td>
+            </tr>
+            <tr>
+                <th>Asistencia</th>
+                <td>{{ registro.asistencia ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Beca</th>
+                <td>{{ registro.beca }}</td>
+            </tr>
+            <tr>
+                <th>Vegetariano</th>
+                <td>{{ registro.vegetariano ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_registro_index') }}">back to list</a>
+
+    <a href="{{ path('app_registro_edit', {'id': registro.id}) }}">edit</a>
+
+    {{ include('registro/_delete_form.html.twig') }}
+{% endblock %}

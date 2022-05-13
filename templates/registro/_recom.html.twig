@@ -1,0 +1,37 @@
+{{ form_start(form) }}
+
+<div class="row ">
+    <div class="col-12 mt-2">
+        <label for="recomendaciontxt" class="form-label">{{ form_label(form.recomendaciontxt) }}</label>
+        <div>
+            {{ form_widget(form.recomendaciontxt,{
+                'attr': {'class': 'form-control',
+                    'placeholder': 'Texto para la recomendación',
+                    'rows':'5',
+                } } ) }}
+        </div>
+        <div class="invalid-error">
+            {{ form_errors(form.recomendaciontxt) }}
+        </div>
+    </div>
+ <div class="col-6 mt-3">
+        <label for="recomendacionFile" class="form-label">{{ form_label(form.recomendacionFile) }}</label>
+        {{ form_widget(form.recomendacionFile,{
+            'attr': {'class': 'form-control',
+                'placeholder': 'Seleccionar archivo',
+            } } ) }}
+        <div class="invalid-error">
+            {{ form_errors(form.recomendacionFile) }}
+        </div>
+    </div>
+
+
+</div>
+
+<hr class="my-4">
+<button class="w-100 btn btn-primary btn-lg">{{ button_label|default('Enviar solicitud') }}</button>
+
+
+
+{{ form_widget(form) }}
+{{ form_end(form) }}

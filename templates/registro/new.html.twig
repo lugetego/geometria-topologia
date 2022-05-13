@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'registro/form_errors.html.twig' %}
+
+{% block title %}{{nombre_evento}}{% endblock %}
+
+{% block body %}
+    <div class="container bg-light">
+        <main>
+
+            {#<div class="alert alert-primary mt-5" role="alert">
+                <h4 class="alert-heading">Recepción de documentos cerrada</h4>
+                <hr>
+                <p>Fecha límite para la recepción de documentos: 14 de enero de 2022.</p>
+            </div>#}
+
+            <div class="py-3">
+                <h2>Instrucciones</h2>
+                <p class="lead">
+                <ul class="list-group list-group-flush ">
+                    <li class="list-group-item bg-light">Se enviará un correo al profesor o profesora que te recomienda para solicitarle
+                        que nos proporcione tu carta de recomendación, por lo que debes asegurarte de escribir correctamente su dirección de correo.</li>
+                    <li class="list-group-item bg-light">Al finalizar el envío de este formulario debes de visualizar una pantalla
+                        de confirmación. Además, recibirás un correo electrónico a la cuenta que proporcionaste, de no
+                        ser así favor de revisar tu carpeta de correos no desados o comunicarte al correo webmaster<i class="fas fa-at"></i>matmor.unam.mx para
+                        asegurarte que hayamos recibido tu solicitud.</li>
+                    <li class="list-group-item bg-light "><strong>Fecha límite para realizar tu registro:</strong> xx de xx de 2022.</li>
+                </ul>
+                </p>
+            </div>
+                    {{ include('registro/_form.html.twig') }}
+        </main>
+
+        <footer class="my-2 pt-2 text-muted text-center text-small">
+            <p class="mb-1">Centro de Ciencias Matemáticas</p>
+            <ul class="list-inline">
+                <li class="list-inline-item"><a href="http://matmor.unam.mx/AvisoPrivacidad-CCM.pdf" target="_blank">Aviso de privacidad</a></li>
+            </ul>
+        </footer>
+    </div>
+
+
+{% endblock %}

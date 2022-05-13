@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Registro index{% endblock %}
+
+{% block body %}
+    <h1>Registro index</h1>
+
+    <table id="example" class="table table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Apaterno</th>
+                <th>Amaterno</th>
+                <th>Nacimiento</th>
+                <th>Correo</th>
+                <th>Universidad</th>
+                <th>Carrera</th>
+                <th>Semestre</th>
+                <th>Profesor</th>
+                <th>UnivProf</th>
+                <th>CorreoProf</th>
+                <th>Asistencia</th>
+                <th>Beca</th>
+                <th>Restricciones</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for registro in registros %}
+            <tr>
+                <td>{{ registro.id }}</td>
+                <td>{{ registro.nombre }}</td>
+                <td>{{ registro.apaterno }}</td>
+                <td>{{ registro.amaterno }}</td>
+                <td>{{ registro.nacimiento ? registro.nacimiento|date('Y-m-d') : '' }}</td>
+                <td>{{ registro.correo }}</td>
+                <td>{{ registro.universidad }}</td>
+                <td>{{ registro.carrera }}</td>
+                <td>{{ registro.semestre }}</td>
+                <td>{{ registro.profesor }}</td>
+                <td>{{ registro.univProf }}</td>
+                <td>{{ registro.correoProf }}</td>
+                <td>{{ registro.asistencia ? 'Yes' : 'No' }}</td>
+                <td>{{ registro.beca }}</td>
+                <td>{{ registro.vegetariano}}</td>
+                <td>
+                    <a href="{{ path('app_registro_show', {'id': registro.id}) }}">show</a>
+                    <a href="{{ path('app_registro_edit', {'id': registro.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="17">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_registro_new') }}">Create new</a>
+{% endblock %}
+ {% block javascripts %}
+
+
+     <script type="application/javascript">
+         $(document).ready(function() {
+             $('#example').DataTable();
+         } );
+     </script>
+
+ {% endblock %}

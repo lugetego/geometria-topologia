@@ -1,0 +1,11 @@
+twig:
+    default_path: '%kernel.project_dir%/templates'
+    globals:
+        nombre_evento: 'Geometría y Topología en Morelia'
+        url_evento: 'https://matmor.unam.mx/eventos/geometria-topologia'
+        url_registro: 'http://132.248.196.77:8000'
+
+when@test:
+    twig:
+        strict_variables: true
+

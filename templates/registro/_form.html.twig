@@ -1,0 +1,190 @@
+{{ form_start(form) }}
+<h4 class="mb-2">Datos personales</h4>
+<div class="row g-3">
+    <div class="col-4">
+        <label for="nombre" class="form-label">{{ form_label(form.nombre) }}</label>
+        {{ form_widget(form.nombre,{
+            'attr': {'class': 'form-control',
+                'placeholder': 'Nombre(s)',
+            } } ) }}
+        <div class="invalid-error">
+            {{ form_errors(form.nombre) }}
+        </div>
+    </div>
+    <div class="col-4">
+        <label for="paterno" class="form-label">{{ form_label(form.apaterno) }}</label>
+        {{ form_widget(form.apaterno,{
+            'attr': {'class': 'form-control',
+                'placeholder': 'Apellido paterno',
+            } } ) }}
+        <div class="invalid-error">
+            {{ form_errors(form.apaterno) }}
+        </div>
+    </div>
+    <div class="col-4">
+        <label for="materno" class="form-label">{{ form_label(form.amaterno) }}</label>
+        {{ form_widget(form.amaterno,{
+            'attr': {'class': 'form-control',
+                'placeholder': 'Apellido materno',
+            } } ) }}
+        <div class="invalid-error">
+            {{ form_errors(form.amaterno) }}
+        </div>
+    </div>
+    <div class="col-4">
+        <label for="email" class="form-label">{{ form_label(form.correo) }}</label>
+        {{ form_widget(form.correo,{
+            'attr': {'class': 'form-control',
+                'placeholder': 'user@example.com',
+            } } ) }}
+        <div class="invalid-error">
+            {{ form_errors(form.correo) }}
+        </div>
+    </div>
+    {#<div class="col-4">
+        <label for="sexo" class="form-label">{{ form_label(form.sexo) }}</label>
+        <div>
+            {% for child in form.sexo %}
+                <div class="form-check form-check-inline">
+                    {{ form_widget(child) }}  {{ form_label(child, null, {'label_attr': {'class': 'form-check-label'}}) }}
+                </div>
+            {% endfor %}
+        </div>
+        <div class="invalid-error">
+            {{ form_errors(form.sexo) }}
+        </div>
+    </div>#}
+    <div class="col-4">
+        <label for="nacimiento" class="form-label">{{ form_label(form.nacimiento) }}</label>
+        {{ form_widget(form.nacimiento,{
+            'attr': {'class': 'form-control',
+            } } ) }}
+        <div>{{ form_errors(form.nacimiento) }}</div>
+    </div>
+</div>
+<hr class="mt-2">
+<h4 class="mb-2">Datos académicos</h4>
+<div class="row g-3">
+
+    <div class="col-4">
+        <label for="universidad" class="form-label">{{ form_label(form.universidad) }}</label>
+        {{ form_widget(form.universidad,{
+            'attr': {'class': 'form-control',
+                'placeholder': 'Institución de procedencia',
+            } } ) }}
+        <div class="invalid-error">
+            {{ form_errors(form.universidad) }}
+        </div>
+    </div>
+    <div class="col-4">
+        <label for="carrera" class="form-label">{{ form_label(form.carrera) }}</label>
+        {{ form_widget(form.carrera,{
+            'attr': {'class': 'form-control',
+                'placeholder': 'Carrera',
+            } } ) }}
+        <div class="invalid-error">
+            {{ form_errors(form.carrera) }}
+        </div>
+    </div>
+    <div class="col-4">
+        <label for="semestre" class="form-label">{{ form_label(form.semestre) }}</label>
+        {{ form_widget(form.semestre,{
+            'attr': {'class': 'form-control',
+                'placeholder': 'Semestre',
+            } } ) }}
+        <div class="invalid-error">
+            {{ form_errors(form.semestre) }}
+        </div>
+    </div>
+    <div class="col-8">
+        <label for="historialFile" class="form-label">{{ form_label(form.historialFile) }}</label>
+        {{ form_widget(form.historialFile,{
+            'attr': {'class': 'form-control',
+                'placeholder': 'Seleccionar archivo',
+            } } ) }}
+        <div class="invalid-error">
+            {{ form_errors(form.historialFile) }}
+        </div>
+    </div>
+</div>
+
+<div class="row mt-2 g-3">
+
+    <div class="col-4">
+        <label for="profesor" class="form-label">{{ form_label(form.profesor) }}</label>
+        {{ form_widget(form.profesor,{
+            'attr': {'class': 'form-control',
+                'placeholder': 'Profesor que lo recomendará',
+            } } ) }}
+        <div class="invalid-error">
+            {{ form_errors(form.profesor) }}
+        </div>
+    </div>
+    <div class="col-4">
+        <label for="universidadProf" class="form-label">{{ form_label(form.univProf) }}</label>
+        {{ form_widget(form.univProf,{
+            'attr': {'class': 'form-control',
+                'placeholder': 'Institución ade procedencia',
+            } } ) }}
+        <div class="invalid-error">
+            {{ form_errors(form.univProf) }}
+        </div>
+    </div>
+    <div class="col-4">
+        <label for="correoProf" class="form-label">{{ form_label(form.correoProf) }}</label>
+        {{ form_widget(form.correoProf,{
+            'attr': {'class': 'form-control',
+                'placeholder': 'user@example.com',
+            } } ) }}
+        <div class="invalid-error">
+            {{ form_errors(form.correoProf) }}
+        </div>
+    </div>
+</div>
+<hr class="mt-2">
+<h4 class="mb-2">Asistencia</h4>
+<div class="row g-3">
+    <div class="col-4">
+        <label for="asistencia" class="form-label">{{ form_label(form.asistencia) }}</label>
+        <div>
+            {% for child in form.asistencia %}
+                <div class="form-check form-check-inline">
+                    {{ form_widget(child) }}  {{ form_label(child, null, {'label_attr': {'class': 'form-check-label'}}) }}
+                </div>
+            {% endfor %}
+        </div>
+        <div class="invalid-error">
+            {{ form_errors(form.asistencia) }}
+        </div>
+    </div>
+    <div class="col-4">
+        <label for="beca" class="form-label">{{ form_label(form.beca) }}</label>
+        {{ form_widget(form.beca,{
+            'attr': {'class': 'form-control',
+                'placeholder': 'beca',
+            } } ) }}
+        <div class="invalid-error">
+            {{ form_errors(form.beca) }}
+        </div>
+    </div>
+    <div class="col-8">
+        <label for="vegetariano" class="form-label">{{ form_label(form.vegetariano) }}</label>
+        <div>
+            {{ form_widget(form.vegetariano,{
+                'attr': {'class': 'form-control',
+                    'placeholder': 'Mencionar si tienes alguna restricción en tu alimentación',
+                    'rows':'3',
+                } } ) }}
+        </div>
+        <div class="invalid-error">
+            {{ form_errors(form.vegetariano) }}
+        </div>
+    </div>
+</div>
+<hr class="my-4">
+<button class="w-100 btn btn-primary btn-lg">{{ button_label|default('Enviar solicitud') }}</button>
+
+
+
+{{ form_widget(form) }}
+{{ form_end(form) }}
