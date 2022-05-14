@@ -493,7 +493,7 @@ class Registro
 
     public function setRecomendacionName(?string $recomendacionName): void
     {
-        $this->recomendacionName = $recomenacionName;
+        $this->recomendacionName = $recomendacionName;
     }
 
     public function getRecomendacionName(): ?string
