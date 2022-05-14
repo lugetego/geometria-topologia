@@ -3,6 +3,8 @@
 {% block title %}Registro index{% endblock %}
 
 {% block body %}
+    {% if is_granted('ROLE_ADMIN') %}
+
     <h1>Registro index</h1>
 
     <table id="example" class="table table-striped" style="width:100%">
@@ -56,8 +58,8 @@
         {% endfor %}
         </tbody>
     </table>
+{% endif %}
 
-    <a href="{{ path('app_registro_new') }}">Create new</a>
 {% endblock %}
  {% block javascripts %}
 
