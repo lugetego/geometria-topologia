@@ -1,73 +1,78 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Registro index{% endblock %}
+{% block title %}Registros{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap5.min.css">
+{% endblock %}
 
 {% block body %}
     {% if is_granted('ROLE_ADMIN') %}
 
-    <h1>Registro index</h1>
+        <div class="container-fluid">
 
-    <table id="example" class="table table-striped" style="width:100%">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nombre</th>
-                <th>Apaterno</th>
-                <th>Amaterno</th>
-                <th>Nacimiento</th>
-                <th>Correo</th>
-                <th>Universidad</th>
-                <th>Carrera</th>
-                <th>Semestre</th>
-                <th>Profesor</th>
-                <th>UnivProf</th>
-                <th>CorreoProf</th>
-                <th>Asistencia</th>
-                <th>Beca</th>
-                <th>Restricciones</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for registro in registros %}
-            <tr>
-                <td>{{ registro.id }}</td>
-                <td>{{ registro.nombre }}</td>
-                <td>{{ registro.apaterno }}</td>
-                <td>{{ registro.amaterno }}</td>
-                <td>{{ registro.nacimiento ? registro.nacimiento|date('Y-m-d') : '' }}</td>
-                <td>{{ registro.correo }}</td>
-                <td>{{ registro.universidad }}</td>
-                <td>{{ registro.carrera }}</td>
-                <td>{{ registro.semestre }}</td>
-                <td>{{ registro.profesor }}</td>
-                <td>{{ registro.univProf }}</td>
-                <td>{{ registro.correoProf }}</td>
-                <td>{{ registro.asistencia ? 'Yes' : 'No' }}</td>
-                <td>{{ registro.beca }}</td>
-                <td>{{ registro.vegetariano}}</td>
-                <td>
-                    <a href="{{ path('app_registro_show', {'id': registro.id}) }}">show</a>
-                    <a href="{{ path('app_registro_edit', {'id': registro.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="17">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-{% endif %}
+
+            <table id="example" class="table table-striped" style="width:100%">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+
+                    <th>Nacimiento</th>
+                    <th>Correo</th>
+                    <th>Institución</th>
+                    <th>Carrera</th>
+                    <th>Semestre</th>
+                    <th>Profesor</th>
+                    <th>Inst. prof</th>
+                    <th>Correo prof</th>
+                    <th>Asistencia</th>
+                    <th>Beca</th>
+                    <th>Restricciones</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for registro in registros %}
+                    <tr>
+                        <td><a href="{{ path('app_registro_show', {'id': registro.id}) }}">{{ registro.slug }}</a></td>
+                        <td>{{ registro.nombre }} {{ registro.apaterno }} {{ registro.amaterno }}</td>
+                        <td>{{ registro.nacimiento ? registro.nacimiento|date('Y-m-d') : '' }}</td>
+                        <td>{{ registro.correo }}</td>
+                        <td>{{ registro.universidad }}</td>
+                        <td>{{ registro.carrera }}</td>
+                        <td>{{ registro.semestre }}</td>
+                        <td>{{ registro.profesor }}</td>
+                        <td>{{ registro.univProf }}</td>
+                        <td>{{ registro.correoProf }}</td>
+                        <td>{{ registro.asistencia }}</td>
+                        <td>{{ registro.beca }}</td>
+                        <td>{{ registro.vegetariano}}</td>
+                        <td>
+                            <a href="{{ path('app_registro_show', {'id': registro.id}) }}"><i class="fas fa-search"></i></a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="17">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
 
 {% endblock %}
- {% block javascripts %}
+  {% block javascripts %}
+      {{ parent() }}
+      <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+      <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+      <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap5.min.js"></script>
 
+      <script type="application/javascript">
+          $(document).ready(function() {
+              $('#example').DataTable();
+          } );
+      </script>
 
-     <script type="application/javascript">
-         $(document).ready(function() {
-             $('#example').DataTable();
-         } );
-     </script>
-
- {% endblock %}
+  {% endblock %}

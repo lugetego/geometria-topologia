@@ -6,6 +6,7 @@
     {# Run `composer require symfony/webpack-encore-bundle`
            and uncomment the following Encore helpers to start using Symfony UX #}
     {% block stylesheets %}
+        
         {{ encore_entry_link_tags('app') }}
 
     {% endblock %}
@@ -18,10 +19,11 @@
                     <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
                         <span class="fs-4">{{nombre_evento}}</span>
                     </a>
+                   
                     <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
                         {% if is_granted('ROLE_ADMIN') %}
                             <div class="dropdown">
-                                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                <a class="btn btn-secondary dropdown-toggle" href="" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="fas fa-user-alt"></i>
                                     {{ app.user.username ?? 'Anonymous user' }}
                                 </a>

@@ -91,7 +91,7 @@ class Registro
     private $correoProf;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="string", length=30)
      */
     private $asistencia;
 
@@ -330,7 +330,7 @@ class Registro
         return $this;
     }
 
-    public function getAsistencia(): ?bool
+    public function getAsistencia(): ?string
     {
         return $this->asistencia;
     }
