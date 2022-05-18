@@ -335,7 +335,7 @@ class Registro
         return $this->asistencia;
     }
 
-    public function setAsistencia(bool $asistencia): self
+    public function setAsistencia(string $asistencia): self
     {
         $this->asistencia = $asistencia;
 
