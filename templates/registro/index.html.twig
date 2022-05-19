@@ -35,9 +35,9 @@
                 <tbody>
                 {% for registro in registros %}
                     <tr>
-                        <td><a href="{{ path('app_registro_show', {'id': registro.id}) }}">{{ registro.slug }}</a></td>
+                        <td><a href="{{ path('app_registro_show', {'slug': registro.slug}) }}">{{ registro.slug }}</a></td>
                         <td>{{ registro.nombre }} {{ registro.apaterno }} {{ registro.amaterno }}</td>
-                        <td>{{ registro.nacimiento ? registro.nacimiento|date('Y-m-d') : '' }}</td>
+                        <td>{{ registro.nacimiento ? registro.nacimiento|format_date('medium',locale='es') : '' }}</td>
                         <td>{{ registro.correo }}</td>
                         <td>{{ registro.universidad }}</td>
                         <td>{{ registro.carrera }}</td>
@@ -49,7 +49,7 @@
                         <td>{{ registro.beca }}</td>
                         <td>{{ registro.vegetariano}}</td>
                         <td>
-                            <a href="{{ path('app_registro_show', {'id': registro.id}) }}"><i class="fas fa-search"></i></a>
+                            <a href="{{ path('app_registro_show', {'slug': registro.slug}) }}"><i class="fas fa-search"></i></a>
                         </td>
                     </tr>
                 {% else %}

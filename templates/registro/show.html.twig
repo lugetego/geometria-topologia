@@ -3,80 +3,67 @@
 {% block title %}Registro{% endblock %}
 
 {% block body %}
-    <h1>Registro</h1>
+    <div class="container mt-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ path('app_registro_index') }}">Solicitudes</a></li>
+                <li class="breadcrumb-item active" aria-current="page"> {{  registro.slug }} </li>
+            </ol>
+        </nav>
+        <div class="row">
+            <div class="col-8">
+                <div class="card border-dark mt-3" style="max-width: 100%">
+                    <div class="card-header">Datos personales</div>
+                    <div class="card-body text-dark">
+                        <h5 class="card-title">{{ registro.nombre }} {{ registro.apaterno }} {{ registro.amaterno }} </h5>
+                        <p class="card-text">
+                        <address>
+                            <strong> {{ registro.correo }} </strong> <br>
+                            {{ registro.nacimiento |format_date('long',locale='es') }}
+                        </address>
+                        </p>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ registro.id }}</td>
-            </tr>
-            <tr>
-                <th>Nombre</th>
-                <td>{{ registro.nombre }}</td>
-            </tr>
-            <tr>
-                <th>Apaterno</th>
-                <td>{{ registro.apaterno }}</td>
-            </tr>
-            <tr>
-                <th>Amaterno</th>
-                <td>{{ registro.amaterno }}</td>
-            </tr>
-            <tr>
-                <th>Sexo</th>
-                <td>{{ registro.sexo ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
-                <th>Nacimiento</th>
-                <td>{{ registro.nacimiento ? registro.nacimiento|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Correo</th>
-                <td>{{ registro.correo }}</td>
-            </tr>
-            <tr>
-                <th>Universidad</th>
-                <td>{{ registro.universidad }}</td>
-            </tr>
-            <tr>
-                <th>Carrera</th>
-                <td>{{ registro.carrera }}</td>
-            </tr>
-            <tr>
-                <th>Semestre</th>
-                <td>{{ registro.semestre }}</td>
-            </tr>
-            <tr>
-                <th>Profesor</th>
-                <td>{{ registro.profesor }}</td>
-            </tr>
-            <tr>
-                <th>UnivProf</th>
-                <td>{{ registro.univProf }}</td>
-            </tr>
-            <tr>
-                <th>CorreoProf</th>
-                <td>{{ registro.correoProf }}</td>
-            </tr>
-            <tr>
-                <th>Asistencia</th>
-                <td>{{ registro.asistencia ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
-                <th>Beca</th>
-                <td>{{ registro.beca }}</td>
-            </tr>
-            <tr>
-                <th>Vegetariano</th>
-                <td>{{ registro.vegetariano ? 'Yes' : 'No' }}</td>
-            </tr>
-        </tbody>
-    </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="card border-dark mt-3" style="max-width: 100%">
+                    <div class="card-header">Datos académicos</div>
+                    <div class="card-body text-dark">
+                        <h5 class="card-title">{{ registro.universidad }}</h5>
+                        <p class="card-text">
+                        <address>
+                            <strong>Carrera:</strong>  {{ registro.carrera }} <br>
+                            <strong>Semestre:</strong>  {{ registro.semestre }} <br>
+                            <strong>Profesor:</strong><small>{{ registro.profesor }}, {{ registro.univProf }},
+                                <em>{{ registro.correoProf }}</em>> </small>  <br>
+                            <i class="fas fa-file-pdf"></i> <a href="{{ vich_uploader_asset(registro, 'historialFile') }}"
+                                                              target="_blank">Historial académico</a>
+                        </address>
+                        </p>
 
-    <a href="{{ path('app_registro_index') }}">back to list</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="card border-dark mt-3" style="max-width: 100%">
+                    <div class="card-header">{{nombre_evento}}</div>
+                    <div class="card-body text-dark">
+                        <h5 class="card-title">Asistencia {{ registro.asistencia }}</h5>
+                        <i class="fas fa-file-pdf"></i> <a href="{{ vich_uploader_asset(registro, 'recomendacionFile') }}"
+                                                           target="_blank">Carta de recomendación</a><br><br>
+                        {{ registro.beca }}
+                        <p class="card-text">
+                        <address>
+                            <hr>
+                            {{ registro.vegetariano }}
+                        </address>
+                        </p>
 
-    <a href="{{ path('app_registro_edit', {'id': registro.id}) }}">edit</a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    {{ include('registro/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 
 
@@ -83,7 +84,7 @@ class RegistroController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="app_registro_show", methods={"GET"})
+     * @Route("/{slug}", name="app_registro_show", methods={"GET"})
      */
     public function show(Registro $registro): Response
     {
