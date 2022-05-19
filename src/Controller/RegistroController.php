@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Registro;
 use App\Form\RegistroType;
 use App\Form\RecomendacionType;
+use App\Form\EvaluacionType;
 use App\Repository\RegistroRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -88,13 +89,21 @@ class RegistroController extends AbstractController
      */
     public function show(Registro $registro): Response
     {
+
+        $dateNow = new \DateTime();
+        $nacimiento = $registro->getNacimiento()->format('Y-m-d');
+        $dateIntervall = $dateNow->diff(new \DateTime($nacimiento));
+        $edad = $dateIntervall->y;
+
+
         return $this->render('registro/show.html.twig', [
             'registro' => $registro,
+            'edad' => $edad,
         ]);
     }
 
     /**
-     * @Route("/{id}/edit", name="app_registro_edit", methods={"GET", "POST"})
+     * @Route("/{slug}/edit", name="app_registro_edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, Registro $registro, EntityManagerInterface $entityManager): Response
     {
@@ -159,6 +168,31 @@ class RegistroController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/{slug}/evaluacion", name="app_registro_evaluacion", methods={"GET", "POST"})
+     */
+    public function evaluacion(Request $request, Registro $registro, EntityManagerInterface $entityManager): Response
+    {
+        $form = $this->createForm(EvaluacionType::class, $registro);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($registro);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_registro_show', ['slug'=>$registro->getSlug()], Response::HTTP_SEE_OTHER);
+
+        }
+           $template = $request->isXmlHttpRequest() ? '_evalua.html.twig' : 'show.html.twig';
+
+
+        return $this->renderForm('registro/'.$template, [
+            'registro' => $registro,
+            'form' => $form,
+        ]);
+    }
+
+    
     /**
      * @Route("/{id}", name="app_registro_delete", methods={"POST"})
      */

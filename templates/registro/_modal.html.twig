@@ -1,0 +1,22 @@
+<div
+        class="modal fade"
+        tabindex="-1"
+        aria-hidden="true"
+        data-modal-form-target="modal"
+>
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{{ modalTitle }}</h4>
+                <button type="button" class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body" data-modal-form-target="modalBody">
+                {{ modalContent|default('Loading...') }}
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>

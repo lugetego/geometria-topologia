@@ -17,18 +17,14 @@
                 <tr>
                     <th>Id</th>
                     <th>Nombre</th>
-
-                    <th>Nacimiento</th>
                     <th>Correo</th>
                     <th>Institución</th>
                     <th>Carrera</th>
                     <th>Semestre</th>
                     <th>Profesor</th>
                     <th>Inst. prof</th>
-                    <th>Correo prof</th>
                     <th>Asistencia</th>
                     <th>Beca</th>
-                    <th>Restricciones</th>
                     <th></th>
                 </tr>
                 </thead>
@@ -37,17 +33,15 @@
                     <tr>
                         <td><a href="{{ path('app_registro_show', {'slug': registro.slug}) }}">{{ registro.slug }}</a></td>
                         <td>{{ registro.nombre }} {{ registro.apaterno }} {{ registro.amaterno }}</td>
-                        <td>{{ registro.nacimiento ? registro.nacimiento|format_date('medium',locale='es') : '' }}</td>
+{#                        <td>{{ registro.nacimiento ? registro.nacimiento|format_date('medium',locale='es') : '' }}</td>#}
                         <td>{{ registro.correo }}</td>
                         <td>{{ registro.universidad }}</td>
                         <td>{{ registro.carrera }}</td>
                         <td>{{ registro.semestre }}</td>
                         <td>{{ registro.profesor }}</td>
                         <td>{{ registro.univProf }}</td>
-                        <td>{{ registro.correoProf }}</td>
                         <td>{{ registro.asistencia }}</td>
                         <td>{{ registro.beca }}</td>
-                        <td>{{ registro.vegetariano}}</td>
                         <td>
                             <a href="{{ path('app_registro_show', {'slug': registro.slug}) }}"><i class="fas fa-search"></i></a>
                         </td>

@@ -11,7 +11,7 @@
             </ol>
         </nav>
         <div class="row">
-            <div class="col-8">
+            <div class="col-6">
                 <div class="card border-dark mt-3" style="max-width: 100%">
                     <div class="card-header">Datos personales</div>
                     <div class="card-body text-dark">
@@ -19,14 +19,16 @@
                         <p class="card-text">
                         <address>
                             <strong> {{ registro.correo }} </strong> <br>
-                            {{ registro.nacimiento |format_date('long',locale='es') }}
+                            {{ registro.nacimiento |format_date('long',locale='es') }}, <small><em>{{ edad }} años</em></small>
                         </address>
                         </p>
-
+                        <br>
+                        <br>
                     </div>
                 </div>
             </div>
-            <div class="col-8">
+
+            <div class="col-6">
                 <div class="card border-dark mt-3" style="max-width: 100%">
                     <div class="card-header">Datos académicos</div>
                     <div class="card-body text-dark">
@@ -36,7 +38,7 @@
                             <strong>Carrera:</strong>  {{ registro.carrera }} <br>
                             <strong>Semestre:</strong>  {{ registro.semestre }} <br>
                             <strong>Profesor:</strong><small>{{ registro.profesor }}, {{ registro.univProf }},
-                                <em>{{ registro.correoProf }}</em>> </small>  <br>
+                                <em>{{ registro.correoProf }}</em> </small>  <br>
                             <i class="fas fa-file-pdf"></i> <a href="{{ vich_uploader_asset(registro, 'historialFile') }}"
                                                               target="_blank">Historial académico</a>
                         </address>
@@ -45,18 +47,57 @@
                     </div>
                 </div>
             </div>
-            <div class="col-8">
+            <div class="col-6">
                 <div class="card border-dark mt-3" style="max-width: 100%">
                     <div class="card-header">{{nombre_evento}}</div>
                     <div class="card-body text-dark">
-                        <h5 class="card-title">Asistencia {{ registro.asistencia }}</h5>
-                        <i class="fas fa-file-pdf"></i> <a href="{{ vich_uploader_asset(registro, 'recomendacionFile') }}"
-                                                           target="_blank">Carta de recomendación</a><br><br>
+                        <h5 class="card-title">Asistencia {{ registro.asistencia }}</h5><br>
+                        {% if registro.recomendacionName is null or registro.recomendacionTxt is null %}
+                            No se ha recibido recomendación
+                        {% elseif registro.recomendacionTxt is null and registro.recomendacionName is not null %}
+                            <i class="fas fa-file-pdf"></i> <a href="{{ vich_uploader_asset(registro, 'recomendacionFile') }}"
+                                                               target="_blank">Carta de recomendación</a>
+                        {% elseif registro.recomendacionTxt is not null and registro.recomendacionName is not null %}
+                            <i class="fas fa-file-pdf"></i> <a href="{{ vich_uploader_asset(registro, 'recomendacionFile') }}"
+                                                               target="_blank">Carta de recomendación</a><br><br>
+                            {{ registro.recomendacionTxt}}
+                        {% endif %}
+                        <br><br>
+
                         {{ registro.beca }}
                         <p class="card-text">
                         <address>
                             <hr>
                             {{ registro.vegetariano }}
+                        </address>
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card border-dark mt-3" style="max-width: 100%">
+                    <div class="card-header">Información de la solicitud</div>
+                    <div class="card-body text-dark">
+                        <h5 class="card-title">{{ registro.aceptado ? 'Aceptado' : 'No aceptado' }}</h5>
+                        <p class="card-text">
+                        <address>
+                            <strong>Registrado:</strong> {{ registro.created |format_date('long',locale='es')}}  <br>
+                            <strong>Modificado:</strong> {{ registro.modified |format_date('long',locale='es')}}
+                            <hr>
+                            <p> {{registro.comentarios}} </p>
+
+                            <div {{ stimulus_controller('modal-form', {
+                                formUrl: path('app_registro_evaluacion',{'slug':registro.slug})
+                            }) }}>
+                                <button
+                                        class="btn btn-primary btn-sm"
+                                        data-action="modal-form#openModal"
+                                >Evaluar solicitud</button>
+                                {{ include('registro/_modal.html.twig', {
+                                    modalTitle: 'Evaluación de solicitud',
+                                }) }}
+                            </div>
                         </address>
                         </p>
 

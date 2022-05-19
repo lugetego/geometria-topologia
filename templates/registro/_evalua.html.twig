@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block header %}
+{% endblock  %}
+
+{% block body %}
+
+    {{ form_start(form, {'action': path('app_registro_evaluacion', { 'slug': registro.slug})}) }}
+    <div class="row ">
+        <div class="col-4">
+            <label for="aceptado" class="form-label">{{ form_label(form.aceptado) }}</label>
+            <div>
+                {% for child in form.aceptado %}
+                    <div class="form-check form-check-inline">
+                        {{ form_widget(child) }}  {{ form_label(child, null, {'label_attr': {'class': 'form-check-label'}}) }}
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="invalid-error">
+                {{ form_errors(form.aceptado) }}
+            </div>
+        </div>
+        <div class="col-12 mt-2">
+            <label for="comentarios" class="form-label">{{ form_label(form.comentarios) }}</label>
+            <div>
+                {{ form_widget(form.comentarios,{
+                    'attr': {'class': 'form-control',
+                        'placeholder': 'Comentarios sobre la solicitud',
+                        'rows':'5',
+                    } } ) }}
+            </div>
+            <div class="invalid-error">
+                {{ form_errors(form.comentarios) }}
+            </div>
+        </div>
+
+
+
+    </div>
+
+    <hr class="my-4">
+    <button class="w-100 btn btn-primary btn-lg">{{ button_label|default('Evaluar') }}</button>
+
+
+
+
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+{% endblock %}
