@@ -8,11 +8,41 @@
 
 {% block body %}
     {% if is_granted('ROLE_ADMIN') %}
-
         <div class="container-fluid">
+            <div class="container">
+                <button type="button" class="btn btn-light">
+                    Registros <span class="badge bg-dark">{{ registros|length }}</span>
+                </button>
+                {% set presenciales = 0 %}
+                {% set virtuales = 0 %}
+                {% for registro in registros %}
+                    {% if registro.asistencia == 'Presencial' %}
+                        {% set presenciales = presenciales + 1 %}
+                    {% else %}
+                        {% set virtuales = virtuales +1 %}
+                    {% endif %}
+                {% endfor %}
+                <button type="button" class="btn btn-light">
+                    Presenciales <span class="badge bg-dark">{{ presenciales }}</span>
+                </button>
+                <button type="button" class="btn btn-light">
+                    Virtuales <span class="badge bg-dark">{{ virtuales }}</span>
+                </button>
+                {% set aceptados = 0 %}
+                {% for registro in registros %}
+                    {% if registro.aceptado == true %}
+                        {% set aceptados = aceptados + 1 %}
+                    {% endif %}
+                {% endfor %}
+                <button type="button" class="btn btn-light">
+                    Aceptados <span class="badge bg-dark">{{ aceptados }}</span>
+                </button>
+                <button type="button" class="btn btn-light">
+                    No aceptados <span class="badge bg-dark">{{ registros|length - aceptados }}</span>
+                </button>
+            </div>
 
-
-            <table id="example" class="table table-striped" style="width:100%">
+            <table id="example" class="mt-5 table table-striped" style="width:100%">
                 <thead>
                 <tr>
                     <th>Id</th>
@@ -33,7 +63,7 @@
                     <tr>
                         <td><a href="{{ path('app_registro_show', {'slug': registro.slug}) }}">{{ registro.slug }}</a></td>
                         <td>{{ registro.nombre }} {{ registro.apaterno }} {{ registro.amaterno }}</td>
-{#                        <td>{{ registro.nacimiento ? registro.nacimiento|format_date('medium',locale='es') : '' }}</td>#}
+                        {#                        <td>{{ registro.nacimiento ? registro.nacimiento|format_date('medium',locale='es') : '' }}</td>#}
                         <td>{{ registro.correo }}</td>
                         <td>{{ registro.universidad }}</td>
                         <td>{{ registro.carrera }}</td>
