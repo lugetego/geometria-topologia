@@ -58,8 +58,8 @@
                                 {% if registro.aceptado == true %}
                                 {{ registro.correo }}
                                     {% if not loop.last %},{% endif %}
+                                    {% set total = total + 1 %}
                                 {% endif %}
-                                {% set total = total + 1 %}
                             {% endfor %}
                             <p>
                                 <br> {{ total }} correos
