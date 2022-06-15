@@ -40,6 +40,36 @@
                 <button type="button" class="btn btn-light">
                     No aceptados <span class="badge bg-dark">{{ registros|length - aceptados }}</span>
                 </button>
+                <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <u>Correos de aceptados</u> <span class="badge bg-primary">{{aceptados}}</span>
+                </button>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Correos de registros aceptados</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            {% set total = 0 %}
+                            {% for registro in registros %}
+                                {% if registro.aceptado == true %}
+                                {{ registro.correo }}
+                                    {% if not loop.last %},{% endif %}
+                                {% endif %}
+                                {% set total = total + 1 %}
+                            {% endfor %}
+                            <p>
+                                <br> {{ total }} correos
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <table id="example" class="mt-5 table table-striped" style="width:100%">
